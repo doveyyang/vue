@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function(){
+            new Vue({
+                el:'#my',
+                data:{
+                    msg:'hello world',
+                    age:20,
+                    flag:true,
+                    obj:{name:'abc',id:1},
+                    img_url:"https://www.baidu.com/img/bd_logo1.png",
+                    d1:'d1',// 样式名称
+                    d2:'d2',
+                    d3:{color:'#f60',background:'blue',fontSize:'20px'},
+                    list:[1,2,3,4],
+                
+
+                },
+                methods:{
+                    fun:function(){
+
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+            .d1{
+                color: #f60;
+            }
+            .d2{
+                border:1px solid #333;
+            }
+    </style>
+</head>
+<body>
+    <div id="my">
+        <!-- <h1>{{msg}}</h1> -->
+        <!-- <img v-bind:src="img_url" :title="msg"> -->
+        <!-- <img v-bind:src="flag?img_url:''" :title="msg"> -->
+
+        <!-- 引用单个 -->
+        <!-- <div :class="'d1'">橙色</div>
+        <div :style="{color:'#f60',fontSize:'36px',marginTop:'10px'}">hehe</div>
+        <div :style="d3">heheheehhe</div> -->
+
+        <!-- 引用多个 添加多个样式-->
+        <!-- <div :class="[d1,d2]">橙色</div> -->
+
+        <!-- 条件 -->
+        <!-- <div :class="{'d2':flag }">橙色</div> -->
+
+        <!-- 三目运算符 -->
+        <!-- <div :class="flag?d1:d2">橙色</div> -->
+
+        <!-- v-for  数组-->
+        <ul>
+            <li v-for="(item,index) in list">{{ item }} === {{index}}</li>
+        </ul>
+        
+        <!-- 对象 -->
+        <ul>
+                <li v-for="(k,v) in obj">{{ k }} === {{v}}</li>
+        </ul>
+
+        
+    </div>
+</body>
+</html>
