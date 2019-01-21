@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="my">
+        <ul class="tab-title">
+            <li :class="{'active':num == 0}" @click="num = 0">标题一</li>
+            <li :class="{'active':num == 1}" @click="num = 1">标题二</li>
+            <li :class="{'active':num == 2}" @click="num = 2">标题三</li>
+            <li :class="{'active':num == 3}" @click="num = 3">标题四</li>
+        </ul>
+        <div class="tab-content">
+            <div v-show="num==0">内容一</div>
+            <div v-show="num==1">内容二</div>
+            <div v-show="num==2">内容三</div>
+            <div v-show="num==3">内容四</div>
+        </div>
+
+        <ul class="tab-title">
+            <li v-for="(v,index) in title" :class="{'active':num == index}" @click="play(index)">{{v}}</li>
+        </ul>
+        <div class="tab-content">
+            <div v-for="(v,index) in content" v-show="num==index">{{v}}</div>
+            <!-- <div v-for v-show="num==1">内容二</div>
+            <div v-for v-show="num==2">内容三</div>
+            <div v-for v-show="num==3">内容四</div> -->
+        </div>
+    </div>
+</body>
+</html>

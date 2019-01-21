@@ -1,0 +1,23 @@
+ul,li{
+    list-style: none;
+}
+.tab-title{
+    font-size: 24px;
+    /* text-align: center; */
+    display: flex;
+    flex-wrap: nowrap;    
+}
+.tab-title li{
+    margin: 0 5px;
+    width: 150px;
+    text-align: center;
+    
+}
+.tab-title .active{
+    color: skyblue;
+    border-bottom: 2px solid skyblue;
+}
+.tab-content{
+    font-size: 20px;
+    margin: 0 10px;
+}
