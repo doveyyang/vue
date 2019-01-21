@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>全选实例</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="my">
+            <input type="checkbox" @change="checkAll" v-model="all" />全选 {{all}}
+        <ul>
+            <li v-for="(item,index) in list">
+                <input type="checkbox" v-model="item.checked" @change="changeItem" />{{item.title}} {{item.checked}}
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
