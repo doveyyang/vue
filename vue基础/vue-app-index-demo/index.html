@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="js/index.js"></script>
+    
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="my">
+        <div class="index-header">
+            <div class="banner">
+                <img v-for="(url,index) in banner_url" :src="url" v-show="bannercount==index" alt="">
+                <!-- <img src="./img/banner2.jpg" alt="">
+                <img src="./img/banner3.jpg" alt="">
+                <img src="./img/banner4.jpg" alt="">
+                <img src="./img/banner5.jpg" alt=""> -->
+                <div class="banner-circle">
+                    <ul>
+                            <li :class="{selected:bannercount == 0}"></li>
+                            <li :class="{selected:bannercount == 1}"></li>
+                            <li :class="{selected:bannercount == 2}"></li>
+                            <li :class="{selected:bannercount == 3}"></li>
+                            <li :class="{selected:bannercount == 4}"></li>
+                    </ul>
+                </div>
+
+            </div>
+         
+        </div>
+        <div class="index-category">
+            <div class="category-item" v-for="(item,index) in lists">
+                <span class="iconfont" :class="item.icon" :style="{backgroundColor:item.color}"></span>
+                <div>{{item.title}}</div>
+            </div>
+            <!-- <div class="category-item">
+                <span class="iconfont icon-jine" style="background-color:green;"></span>
+                <div>好爱你形状美食</div>
+            </div>
+            <div class="category-item">
+                <span class="iconfont icon-jine" style="background-color:green;"></span>
+                <div>好爱你形状美食</div>
+            </div>
+            <div class="category-item">
+                <span class="iconfont icon-jine" style="background-color:green;"></span>
+                <div>好爱你形状美食</div>
+            </div>
+            <div class="category-item">
+                <span class="iconfont icon-jine" style="background-color:green;"></span>
+                <div>好爱你形状美食</div>
+            </div>
+            <div class="category-item">
+                <span class="iconfont icon-jine" style="background-color:green;"></span>
+                <div>好爱你形状美食</div>
+            </div> -->
+        </div>
+
+    </div>
+</body>
+</html>

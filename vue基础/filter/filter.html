@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        window.onload = function(){
+            //定义 全局
+            Vue.filter('addZero',function(data){
+                return data<10?'0'+data:data;
+            })
+
+            new Vue({
+                el:'#my',
+                data:{
+                    num:2,
+                    iNum:'',
+                    list:[
+                        {title:'yiyiyi',type:'1'},
+                        {title:'ererer',type:'2'},
+                        {title:'sansansan',type:'3'},
+                        {title:'sisisi',type:'4'},
+                    ],
+                    curTime:1542200169,
+
+                },
+                methods:{
+
+                },
+                filters:{
+                    //局部过滤器
+                    roundNum:function(data,n){
+                        return data.toFixed(n?n:2);
+                    },
+                    toShortShow:function(data,len){
+                        if(data === '' || data==undefined || data ===
+                         null) return;
+                         if(data.length >= len){
+                             var str = data.substr(0,len)+'...'
+                             return str;
+                         }else{
+                             return data;
+                         }
+                    },
+                    showType:function(data){
+                        switch(data){
+                            case '1': return '未发货';
+                            case '2': return '待发货';
+                            case '3': return '已发货';
+                            case '4': return '已完成';
+                        }
+                    },
+                    date:function(data){
+                        var d = new Date(data*1000);
+                        return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDay();
+                        // return d.toTimeString();
+                    }
+                }
+            })
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="my">
+        {{num | addZero}}
+        {{13 | addZero}}
+        <div v-bind:id="1|addZero">111</div>
+        <div>{{3.1665|roundNum}}</div>
+        <!-- 传递参数 -->
+        <div>{{3.16666|roundNum(4)}}</div>
+        <input type="text" v-model="iNum" /> {{iNum | toShortShow(5)}}
+
+        <ul>
+            <li v-for="(v) in list"> {{v.title}} ----- {{v.type | showType}} </li>
+        </ul>
+
+        <p>时间：{{ curTime | date }}</p>
+
+
+    </div>
+</body>
+</html>

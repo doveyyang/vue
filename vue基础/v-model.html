@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        // v-model 获取表单值
+        // 单选 多选 下拉框 输入
+
+
+        window.onload = function(){
+
+            new Vue({
+                el:'#my',
+                data:{
+                    t:'hello world',
+                    t1:true,
+                    t2:['1'],
+                    lists:[
+                        {name:'老师',value:"0"},
+                        {name:'学生',value:"1"},
+                        {name:'家长',value:"2"}
+                    ],
+                    t3:"0",
+                    t4:"苹果",
+                    t5:"1",
+                    
+                },
+                methods:{
+
+                }
+            })
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="my">
+        <!-- 表单输入框 -->
+        <input type="text" v-model="t" :disabled="t==123" />{{t}}
+
+        <!-- 复选框  t1: true/false-->
+        <div>
+            <input type="checkbox" v-model="t1" />{{t1}}
+        </div>
+         <!-- 复选框 -->
+         <div>
+            <input type="checkbox" v-model="t2" value="0"/> 逛街
+            <input type="checkbox" v-model="t2" value="1"/>打游戏
+            <input type="checkbox" v-model="t2" value="2"/>跳舞
+            <p>{{t2}}</p>
+        </div>
+
+        <!-- 复选框 动态 -->
+        <div v-for="item in lists">
+            <input  type="checkbox" v-model="t2" :value="item.value"/> 
+            {{item.name}}
+        </div>
+        <p>{{t2}}</p>
+
+        <!-- 单选框 组 -->
+        <div>
+            <input type="radio" v-model="t3" value="0" name="test">男
+            <input type="radio" v-model="t3" value="1" name="test">女
+            <p>{{t3}}</p>
+        </div>
+
+        <!-- 下拉框 -->
+        <div>
+            <select v-model="t4">
+                <option >苹果</option>
+                <option >梨</option>
+                <option >香蕉</option>
+                <option >花生</option>
+            </select>
+            {{t4}}
+        </div>
+        <!-- 下拉框 -->
+        <div>
+            <select v-model="t5">
+                <option value="1">苹果</option>
+                <option value="2">梨</option>
+                <option value="3">香蕉</option>
+                <option value="4">花生</option>
+            </select>
+            {{t5}}
+        </div>
+
+         <!-- 下拉框 -->
+         <div>
+                <select v-model="t5">
+                    <option v-for="item in lists" :value="item.value">{{item.name}}</option>
+                    <!-- <option value="2">梨</option>
+                    <option value="3">香蕉</option>
+                    <option value="4">花生</option> -->
+                </select>
+                {{t5}}
+            </div>
+            <!-- 下拉框 -->
+            
+
+            
+
+    </div>
+</body>
+</html>

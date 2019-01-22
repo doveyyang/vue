@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding:0;
+}
+ul,li{
+    list-style: none;
+}
+
+body,html{
+    height: 100%;
+    width: 100%;
+    /* background-color: #316BAA; */
+}
+a{
+   text-decoration: none;
+}
+
+.body{
+    height: 100%;
+    font-size: 14px;
+}
+.content{
+    width: 200px;
+    height: 100%;
+    background-color: #316BAA;
+    color: white;
+    
+    
+}
+.content a{
+    color:white;
+}
+
+.content .ul-item {
+    line-height:30px;
+    background-color: #316BAA;
+    text-indent: 1em;
+    cursor: pointer;
+}
+.content .ul-item :hover{
+    color:grey;
+}
+
+.content .li-item {
+    line-height:30px;
+    /* padding: 10px 20px; */
+    background-color: #275586;
+    
+    text-indent: 2em;
+    cursor: pointer;
+}
+.content .lil-item{
+    color: grey;
+}
