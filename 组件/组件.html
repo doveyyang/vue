@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+    <script src="./vue.js"></script>
+    <script>
+
+        // 全局组件创建
+        var c = Vue.extend({
+            template:'<h1>hello</h1>'
+        })
+        Vue.component('hello',c)
+
+        //创建方式二
+        Vue.component('my_hello',{
+            template:"<h1>my-hello</h1>"
+        })
+
+        window.onload = function(){
+
+            new Vue({
+                el:'#my',
+                data:{
+                    t:'hello world',
+                    t1:true,
+                    t2:['1'],
+                    lists:[
+                        {name:'老师',value:"0"},
+                        {name:'学生',value:"1"},
+                        {name:'家长',value:"2"}
+                    ],
+                    t3:"0",
+                    t4:"苹果",
+                    t5:"1",
+                    
+                },
+                methods:{
+
+                },
+                components:{
+                    // 局部组件 创建
+                    "my-address":{
+                        template:'<h1>my address</h1>',// h5 中的字符模板
+                        data(){
+                            return {
+                                title:'我的地址',
+                                arr:['a','b','c']
+                            }
+                        }
+                    },
+                    "my-address2":{
+                        template:'<h1>my address2</h1>'
+                    },
+                    "my-address3":{
+                        template:'#my-address3',
+                        data(){
+                            return {
+                                title:'我的地址',
+                                arr:['a','b','c']
+                            }
+                        },
+
+                    },
+                    "my-tab":{
+                        template:'#mytab',
+
+                    }
+                }
+            })
+       }  
+    </script>
+</head>
+<template id="my-address3">
+    <div>
+        <h4>{{title}}</h4>
+        <ul>
+            <li v-for="i in arr">{{i}}</li>
+            <!-- <li>feaf</li>
+            <li>wet</li>
+            <li>qwet</li>
+            <li>qt</li> -->
+        </ul>
+    </div>
+</template>
+<template id="mytab">
+    <div>
+        
+    </div>
+</template>
+<body>
+    <div id="my">
+        <hello></hello>
+        <my_hello></my_hello>
+        <my-address></my-address>
+        <my-address3></my-address3>
+
+    </div>
+</body>
+</html>
