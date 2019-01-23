@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+    <script src="./vue.js"></script>
+    <script>
+        window.onload = function(){
+
+            new Vue({
+                el:'#my',
+                data:{
+                    flag:"my-a",
+                },
+                methods:{},
+                components:{
+                    // 局部组件 创建
+                    "my-a":{
+                        template:'#a',
+                        data(){
+                            return {
+                                content:'A'
+                            }
+                        }
+                    }
+                }
+            })
+       }  
+    </script>
+</head>
+<template id="a">
+    <div >
+        <!-- slot 插槽 内容分发  -->
+        <h1>A组件</h1>
+        <slot :content="content"></slot>
+    </div>
+</template>
+<body>
+    <div id="my">
+
+       <!-- slot 插槽 内容分发  将父组件的内容放到子组件指定位置-->
+       <!-- 匿名插槽 具名插槽 -->       
+       <my-a>
+           <div slot-scope="data">我获得了：{{data.content}}奖</div>
+       </my-a>
+        
+
+    </div>
+</body>
+</html>
