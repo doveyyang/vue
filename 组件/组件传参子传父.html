@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+    <script src="./vue.js"></script>
+    <script>
+
+        // 全局组件创建
+        var c = Vue.extend({
+            template:'<h1>hello</h1>'
+        })
+        Vue.component('hello',c)
+
+        //创建方式二
+        Vue.component('my_hello',{
+            template:"<h1>my-hello</h1>"
+        })
+
+        window.onload = function(){
+
+            new Vue({
+                el:'#my',
+                data:{
+                    lists:[
+                        {name:'老师',value:"0"},
+                        {name:'学生',value:"1"},
+                        {name:'家长',value:"2"}
+                    ],
+                    pname:'父组件的值！！！',
+                    page:20,
+                    obj:{
+                        name:'爸爸',
+                        age:50,
+                        lists:[
+                            {name:'老师',value:"0"},
+                            {name:'学生',value:"1"},
+                            {name:'家长',value:"2"}
+                        ]
+                    },
+                    title:['在线咨询111','产品介绍111','会员介绍111','我的详情111'],
+                    content:['内容一11','内容二11','内容三11','内容四11']
+                },
+                methods:{
+                    get:function(title){
+                        this.pname = title;// 获取自组件的名称
+                    }
+                },
+                components:{
+                    // 局部组件 创建
+                    "my-address":{
+                        template:'#myaddress',// h5 中的字符模板
+                        data(){
+                            return {
+                                title:'子组件的地址',
+                                arr:['a','b','c']
+                            }
+                        },
+                        props:['pname','page','obj'], // 父向子传递
+                        methods:{
+                            send:function(){
+                                // 发送广播
+                                this.$emit('send',this.title)
+                            }
+                        }
+                    },
+                    "my-tab":{
+                        template:'#mytab',
+                        data(){
+                            return{
+                                num:0,
+                                // title:['在线咨询','产品介绍','会员介绍','我的详情'],
+                                // content:['内容一','内容二','内容三','内容四']
+                            }
+                        },
+                        methods:{
+                            play(index){
+                                this.num = index;
+                            }
+                        },
+                        props:['title','content']
+                    }
+                }
+            })
+       }  
+    </script>
+</head>
+<template id="myaddress">
+    <div>
+        <h1>my address---{{page}}</h1>
+        <h4>{{pname}}</h4>
+        <button @click="send">子传父</button>
+        <ul>
+            <li v-for="v in obj.lists">{{v.name}}--{{v.value}}</li>
+        </ul>
+    </div>
+</template>
+<template id="mytab">
+    <div>
+        <ul class="tab-title">
+            <li v-for="(v,index) in title" :class="{'active':num == index}" @click="play(index)">{{v}}</li>
+        </ul>
+        <div class="tab-content">
+            <div v-for="(v,index) in content" v-show="num==index">{{v}}</div>
+        </div>
+    </div>
+</template>
+<body>
+    <div id="my">
+        <!-- $emit 发射  send 名称-->
+        <my-address v-bind:pname="pname" :page="page" :obj="obj" v-on:send="get"></my-address>
+        <my-tab :title="title" :content="content"></my-tab>
+
+    </div>
+</body>
+</html>

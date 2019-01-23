@@ -35,7 +35,7 @@
                     t3:"0",
                     t4:"苹果",
                     t5:"1",
-                    
+                    flag:"my-address",
                 },
                 methods:{
 
@@ -96,6 +96,10 @@
         <my_hello></my_hello>
         <my-address></my-address>
         <my-address3></my-address3>
+
+        <button @click="flag='my-address'">tab</button>
+        <button @click="flag='my-address3'">address</button>
+        <div :is="flag"></div>
 
     </div>
 </body>
