@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+    <script src="./vue.js"></script>
+    <script>
+        window.onload = function(){
+
+            new Vue({
+                el:'#my',
+                data:{
+                    flag:"my-a",
+                },
+                methods:{},
+                components:{
+                    // 局部组件 创建
+                    "my-a":{
+                        template:'<h1>组件A {{a}}</h1>',
+                        data(){
+                            return {
+                                a:Math.random(),
+                            }
+                        }
+                    },
+                    "my-b":{
+                        template:'<h1>组件B {{b}}</h1>',
+                        data(){
+                            return {
+                                b:Math.random(),
+                            }
+                        }
+                    },
+                    "my-c":{
+                        template:'<h1>组件C {{c}}</h1>',
+                        data(){
+                            return {
+                                c:Math.random()
+                            }
+                        }
+                    }
+                }
+            })
+       }  
+    </script>
+</head>
+<body>
+    <div id="my">
+        <button @click="flag='my-a'">A</button>
+        <button @click="flag='my-b'">B</button>
+        <button @click="flag='my-c'">C</button>
+
+        <!-- 缓存组件的数据 -->
+        <!-- include: 只有匹配的组件才会缓存 支持','连接多个或者正则-->
+        <!-- exclude 任何组件都不缓存 -->
+        <keep-alive include="my-a,my-c">   
+            <component :is="flag"></component>
+        </keep-alive>
+        <keep-alive exclude="my-a,my-c">   
+            <component :is="flag"></component>
+        </keep-alive>
+        
+
+    </div>
+</body>
+</html>

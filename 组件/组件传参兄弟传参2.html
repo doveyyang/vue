@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+    <script src="./vue.js"></script>
+    <script>
+        var Bus = new Vue(); // 定义一个空对象 用来触发和监听实例 相当于第三方
+
+        var A={
+            template:'#a',// h5 中的字符模板
+            data(){
+                return {
+                    content:'A组件'
+                }
+            },
+            methods:{
+                send:function(){
+                    if(!this.content) return ;
+                    Bus.$emit('sentout',this.content);
+                }
+            }
+        };
+        var B = {
+            template:'#b',
+            data(){
+                return{
+                    content:'B组件'
+                }
+            },
+            methods:{
+                send:function(){
+                    Bus.$emit('sentoutB',this.content);
+                }
+            },
+           
+            props:['dcontent']
+        }
+        var C = {
+            template:'#c',
+            data(){
+                return{
+                    contentA:'',                    
+                    contentB:''
+                }
+            },
+            methods:{
+            },
+            mounted(){
+                Bus.$on('sentout',data=>{
+                    this.contentA = data;
+                })
+                Bus.$on('sentoutB',data=>{
+                    this.contentB = data;
+                })
+            },
+        }
+        
+
+        window.onload = function(){
+            new Vue({
+                el:'#my',
+                data:{
+                    content:'',
+                },
+                methods:{
+                    update:function(data){
+                        console.log('父组件接收到的值为：',data)
+                        this.dContent = data;
+                    }
+                },
+                components:{
+                    // 局部组件
+                    "mya":A,
+                    "myb":B,
+                    "myc":C,
+                }
+            })
+       }  
+    </script>
+</head>
+<template id="a">
+    <div style="border:1px solid red;">
+        <h2>A组件</h2>
+        <h6>请输入：<input type="text" v-model="content"></h6>
+        <button @click="send">传递</button>
+
+
+    </div>
+</template>
+<template id="b">
+    <div style="border:1px solid purple;">
+            <h2>{{content}}</h2>
+            <button @click="send">传递</button>
+    </div>
+</template>
+<template id="c">
+        <div style="border:1px solid pink;">
+            <h2>C组件</h2>
+            接收到的值为：{{contentA}} {{contentB}}
+        </div>
+    </template>
+<body>
+    <div id="my">
+        <!-- @ == v-on 事件绑定-->
+        <mya ></mya>
+        <myb ></myb>
+        <myc ></myc>
+    </div>
+</body>
+</html>

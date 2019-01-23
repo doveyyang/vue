@@ -62,7 +62,7 @@
                         methods:{
                             send:function(){
                                 // 发送广播
-                                this.$emit('send',this.title)
+                                this.$emit('aaaa',this.title)
                             }
                         }
                     },
@@ -110,7 +110,7 @@
 <body>
     <div id="my">
         <!-- $emit 发射  send 名称-->
-        <my-address v-bind:pname="pname" :page="page" :obj="obj" v-on:send="get"></my-address>
+        <my-address v-bind:pname="pname" :page="page" :obj="obj" v-on:aaaa="get"></my-address>
         <my-tab :title="title" :content="content"></my-tab>
 
     </div>
