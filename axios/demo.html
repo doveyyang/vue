@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:"#my",
+                data:{
+                    list:[],
+                    info:{ name:'aaa',id:1 }
+                },
+                methods:{
+                    send2(){
+                        axios.post('http://localhost:3000/map/add1',{
+                            data:this.info
+                        }).then(res=>{
+                            console.log(res);
+                            // if(res.data && res.data.result.length>0){
+                            //     this.list = res.data.result;
+                            // }
+                        }).catch(error=>{
+                            console.log(error)
+                        })
+                    },send1(){
+
+                    }
+                },
+                mounted(){
+                    // axios.get('http://localhost:3000/map/add2').then(res=>{
+                    //     console.log(res);
+                    //     if(res.data && res.data.result.length>0){
+                    //         this.list = res.data.result;
+                    //     }
+                    // }).catch(error=>{
+                    //     console.log(error)
+                    // })
+                    // axios({url:'http://localhost:3000/map/add2',
+                    //     method:'get'}).then(res=>{
+                    //     console.log(res);
+                    //     if(res.data && res.data.result.length>0){
+                    //         this.list = res.data.result;
+                    //     }
+                    // }).catch(error=>{
+                    //     console.log(error)
+                    // })
+                    axios.get('http://localhost:3000/map/add2',{
+                         params:this.info
+                    }).then(res=>{
+                        console.log(res);
+                        if(res.data && res.data.result.length>0){
+                            this.list = res.data.result;
+                        }
+                    }).catch(error=>{
+                        console.log(error)
+                    })
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="my">
+        <button @click="send1">get</button>
+        <input type="text" v-model="info.name">
+        <button @click="send2">post</button>
+        <ul>
+            <li v-for="(v) in list">{{v.name}}  {{v.content}}</li>
+        </ul>
+    </div>
+</body>
+</html>

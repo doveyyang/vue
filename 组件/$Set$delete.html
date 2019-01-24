@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+    <script src="./vue.js"></script>
+    <script>
+        window.onload = function(){
+            new Vue({
+                el:'#my',
+                data:{
+                   info:{id:1,price:15,name:'套餐A',count:1}
+                },
+                methods:{
+                    add:function(){
+                        // console.log('ok');
+                        // this.info.msg="hello";
+                        // this.info.name="AAA";
+                        
+
+                        this.$set(this.info,'msg','price')
+                    },
+                    upd:function(){
+                        // this.info.name="ttt"
+                        this.$data.info.name='ttt'
+                    },
+                    del:function(){
+                        this.$delete(this.info,'msg')
+                    }
+                },
+                
+            })
+       }  
+    </script>
+    <style>
+        /*  */
+        [v-clock]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="my">
+    <button @click="add">add</button>
+    <button @click="upd">upd</button>
+    <button @click="del">del</button>
+    <!-- v-clock 解决浏览器的闪烁 -->
+    <p v-clock>{{info}}</p>
+    </div>
+</body>
+</html>

@@ -15,6 +15,8 @@
                    info:{id:1,price:15,name:'套餐A',count:1},
                    sale:0.8,
                    freight:5,
+                   total3:''
+
 
                 },
                 methods:{
@@ -33,6 +35,15 @@
                         }
 
                     }
+                },
+                watch:{
+                    "info.count":{
+                        handler(newValue,oldValue){
+                            console.log(newValue,oldValue)
+                            this.total3 = this.info.price*this.info.count*this.sale+this.freight;
+                        },
+                        deep:true
+                    }
                 }
             })
        }  
@@ -41,7 +52,9 @@
 <body>
     <div id="my">
         <div>您购买了{{info.name}},共{{info.count}}份</div> 
+        <button @click="info.count++">加入购物车</button>
         <h1>总价：{{total}}元</h1>
+        <h1>总价：{{total3}}元</h1>
     </div>
 </body>
 </html>
