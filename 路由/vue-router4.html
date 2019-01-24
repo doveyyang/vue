@@ -13,7 +13,16 @@
             template:'#home'
         }
         var News = {
-            template:'#news'
+            template:'#news',
+            data(){
+                return {
+                    name:'news-name',
+                    id:18,
+                }
+            }
+        }
+        var News2 = {
+            template:'#news2'
         }
         var Login={
             template:'#login'
@@ -30,10 +39,11 @@
                 component:News ,
                 children:[
                     { path:'login',component:Login },
-                    { path:'info',component:Info }
+                    { path:'info',component:Info },
+                    { path:'new2/:name/:id',component:News2 }
                 ]
             },
-            { path:'/login',component:Login }
+            { path:'/login',component:Login },
         ]
         //挂载路由实例到Vue中
         var router = new VueRouter({
@@ -50,7 +60,7 @@
                 },
                 methods:{
                     goto(){
-                        router.push({path:'/login'})
+                        router.push({path:'/news2'})
                     }
                 },
                 router:router
@@ -64,10 +74,15 @@
 <template id="home">
     <div>主页模块</div>
 </template>
+<template id="news2">
+        <div>news 2  {{ $route.params.name }}---{{$route.params.id}}</div>
+    </template>
 <template id="news">
     <div>
         <router-link to="/news/info">info主页</router-link>
         <router-link to="/news/login">登录页面</router-link>
+        <router-link :to="'/news/new2/'+name+'/'+id">页面传值</router-link>
+
         <div>
             <router-view></router-view>
         </div>
