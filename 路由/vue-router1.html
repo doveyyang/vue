@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script>
+        // 路由 把数据从一个地方传送到另一个地方的行为和动作
+        // 1 定义组件 主页面 新闻页        
+        // 2 配置页面 /home 主页面 /news 新闻页        
+        // 3 创建router实例 管理路由
+        // var router = new VueRouter({
+        //     // 配置路由
+        // })        
+        // 4 router实例注入到vue实例中
+
+        // 1 定义组件 主页面 新闻页
+        // var home= Vue.component('Home',{
+        //     template:'#home'
+        // })
+        var Home = {
+            template:'#home',
+
+        }
+        var News={
+            template:"<h1>新闻组件</h1>"
+        }
+
+        
+        // 2 配置页面 /home 主页面 /news 新闻页
+        var routes = [
+            { path:'/home',component:Home },
+            { path:'/news',component:News },
+            { path:'/',redirect:'/home' }
+        ]
+
+        // 3 创建router实例 管理路由
+        var router = new VueRouter({
+          routes:routes // routes
+        })
+        
+        // 4 router实例注入到vue实例中
+
+        window.onload=function(){
+            new Vue({
+                el:'#my',
+                data:{
+
+                },
+                methods:{
+
+                },
+                router, //注入vue实例
+            })
+        }
+    </script>
+</head>
+<template id="home">
+    <div>
+        <h2>Home 主页面</h2>
+         
+    </div>
+</template>
+<body>
+    <div id="my">
+        <!-- <a href="/home">主页</a>
+        <a href="/news">新闻板块</a> -->
+        <!-- 组件的导航，默认会渲染成a标签  to:指定的链接地址-->
+        <router-link to="/home">主页</router-link>
+        <router-link to="/news">新闻</router-link>
+        
+        <div>
+            <!-- 路由渲染的出口文件，路由匹配的组件将渲染在这里 -->
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+</html>

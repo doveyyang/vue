@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>        
+    <script src="./node_modules/vue-router/dist/vue-router.min.js"></script>
+    <script>
+        //定义路由模板
+        var Home = {
+            template:'#home'
+        }
+        var News = {
+            template:'#news'
+        }
+        var Login={
+            template:'#login'
+        }
+        
+        var Info={
+            template:'#info'
+        }
+        //初始化路由配置
+        var routes = [
+            { path:'/home',component:Home },
+            { 
+                path:'/news',
+                component:News ,
+                children:[
+                    { path:'login',component:Login },
+                    { path:'info',component:Info }
+                ]
+            },
+            { path:'/login',component:Login }
+        ]
+        //挂载路由实例到Vue中
+        var router = new VueRouter({
+            routes:routes
+        });
+
+        //页面上引用路由挂载到Vue上
+        window.onload = function(){
+            console.log('onload...')
+            new Vue({
+                el:'#my',
+                data:{
+                    id:10,
+                },
+                methods:{
+                    goto(){
+                        router.push({path:'/login'})
+                    }
+                },
+                router:router
+            });
+        }
+    </script>
+</head>
+<template id="info">
+    <div>info</div>
+</template>
+<template id="home">
+    <div>主页模块</div>
+</template>
+<template id="news">
+    <div>
+        <router-link to="/news/info">info主页</router-link>
+        <router-link to="/news/login">登录页面</router-link>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+<template id="login">
+    <div>登录模块</div>
+</template>
+
+
+
+<body>
+       <div id="my">
+            <router-link to="/home">主页</router-link>
+            <router-link to="/news">新闻</router-link>
+            <button @click="goto">GoTo</button>
+            <router-view></router-view>
+       </div> 
+</body>
+</html>
