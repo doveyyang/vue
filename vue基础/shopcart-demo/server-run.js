@@ -1,16 +1,19 @@
 var connect = require('connect');  //创建连接
 var bodyParser = require('body-parser');   //body解析
 var serveStatic = require('serve-static');   //目录访问（静态文件访问）
+var url = require("url");
+var querystring = require("querystring");
+
 var list=[
-	{id:1,content:'手机',status:false},
-	{id:2,content:'手机',status:false},
-	{id:3,content:'电脑',status:false},
-	{id:4,content:'平板',status:true},
-	{id:5,content:'包包',status:false},
-	{id:6,content:'衣服',status:false},
-	{id:7,content:'玩具',status:true}	 
+	{id:1,content:'手机1',status:false},
+	{id:2,content:'手机2',status:false},
+	{id:3,content:'电脑3',status:false},
+	{id:4,content:'平板4',status:true},
+	{id:5,content:'包包5',status:false},
+	{id:6,content:'衣服6',status:false},
+	{id:7,content:'玩具7',status:true}	 
 ];
-var size = 10;//一页10条数据
+var size = 2;//一页10条数据
 var app = connect()
     .use(bodyParser.json())   //JSON解析
     .use(bodyParser.urlencoded({extended: true}))
@@ -29,9 +32,23 @@ var app = connect()
 		next();  //next 方法就是一个递归调用
 	})
 	.use('/cart/list',function(req,res,next){
+		let currentPage = 0;
+		// console.log('query:',req)
+		//获取返回的url对象的query属性值 
+		var arg = url.parse(req.url).query;
+		
+		//将arg参数字符串反序列化为一个对象
+		var params = querystring.parse(arg);
+
+		if(params.currentPage){
+			currentPage = params.currentPage;
+		}
+		console.log(currentPage)
+		let nArr = list.slice(currentPage*size,currentPage*size+size);
+		console.log(nArr)
 		var result = {
 			code:200,
-			result:list,
+			result:nArr,
 		}
 		res.end(JSON.stringify(result));		
 		next();
@@ -81,6 +98,12 @@ var app = connect()
 			}
 		})
 		res.end(JSON.stringify(list))
+		next()
+	})
+	.use('/list/getPageCount',function(req,res,next){
+		
+		let count = Math.ceil(list.length/size);
+		res.end(JSON.stringify(count))
 		next()
 	})
 
