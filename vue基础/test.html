@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function(){
+            new Vue({
+                el:'#my',
+                data:{
+                    msg:'hello world',
+                    age:30,
+                    flag:true,
+                    obj:{name:'abc',id:1},
+                    img_url:"https://www.baidu.com/img/bd_logo1.png",
+                    d1:'d1',// 样式名称
+                    d2:'d2',
+                    d3:{color:'#f60',background:'blue',fontSize:'20px'},
+                    list:[1,2,3,4],
+                    isShow:false,
+
+                },
+                methods:{
+                    fun:function(){
+
+                    },
+                    play:function(){
+                        this.age ++;
+                    },
+                    toggle(){
+                        this.isShow = !this.isShow;
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+          transition: opacity .5s
+        }
+        .fade-enter, .fade-leave-active {
+          opacity: 0
+        }
+    </style>
+</head>
+<body>
+    <div id="my">
+         <input type="button" value="按钮" @click="toggle">
+         {{isShow}}
+        <transition name="fade">
+            <div id="div1" v-show="isShow" transiton="fade">aaaaaa</div>
+        </transition>
+    </div>
+</body>
+</html>

@@ -11,6 +11,7 @@ window.onload = function(){
         },
         methods: {
             checkAllChange:function(){
+                debugger
                 //var self = this;
                 // self.lists.forEach(function(item){
                 //     item.check = self.checkAll.check;
